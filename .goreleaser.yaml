@@ -6,6 +6,7 @@
 # yaml-language-server: $schema=https://goreleaser.com/static/schema.json
 # vim: set ts=2 sw=2 tw=0 fo=cnqoj
 
+
 version: 1
 
 before:
@@ -18,11 +19,17 @@ before:
 builds:
   - env:
       - CGO_ENABLED=0
-      - GITHUB_TOKEN={{$GITHUB_TOKEN}}
+
     goos:
       - linux
       - windows
       - darwin
+    goarch:
+      - amd64
+      - arm64
+
+    flags:
+      - -mod=vendor
 
 archives:
   - format: tar.gz
@@ -45,3 +52,13 @@ changelog:
     exclude:
       - "^docs:"
       - "^test:"
+
+release:
+  prerelease: auto
+
+universal_binaries:
+  - replace: true
+
+checksum:
+  name_template: 'checksums.txt'
+  
