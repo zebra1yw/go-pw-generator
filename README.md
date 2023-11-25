@@ -17,13 +17,13 @@ To generate a password, run the following command:
 
 To generate a 6-character password: 
 ```
-pwGen -l 6
+pwGen generate -l 6
 ```
 
 You can also specify the length of the password,  to generate a 12-character password with symbols, numbers, and mixed-case letters, simply type:
 
 ```
- pwGen -l 12 -u -d -s
+ pwGen generate -l 12 -u -d -s
 ```
 
 # Contributing
