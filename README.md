@@ -11,6 +11,10 @@ To install go-pw-generator, you can use the go get command:
 ```
 go get github.com/zebra1yw/go-pw-generator
 ```
+or
+```
+curl -sSL https://raw.githubusercontent.com/zebra1yw/go-pw-generator/main/godownloader.sh | bash
+```
 
 # Usage
 To generate a password, run the following command:
