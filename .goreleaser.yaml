@@ -24,12 +24,7 @@ builds:
       - linux
       - windows
       - darwin
-    goarch:
-      - amd64
-      - arm64
 
-    flags:
-      - -mod=vendor
 
 archives:
   - format: tar.gz
