@@ -9,14 +9,14 @@ Easy to Use: Simply run the command and get a secure password instantly.
 # Installation
 To install go-pw-generator, you can use the go get command:
 ```
-go get github.com/zebra1yw/go-pw-generator
+go install github.com/zebra1yw/go-pw-generator
 ```
 or
 for MacOS/Linux
 ```
-curl -sSL https://raw.githubusercontent.com/zebra1yw/go-pw-generator/main/godownloader.sh | bash
+sudo /bin/sh -c "$(curl -fsSL https://raw.githubusercontent.com/zebra1yw/go-pw-generator/main/godownloader.sh)" -- -b /usr/local/bin
 ```
-for Windows
+for Windows 
 ```
 Invoke-WebRequest -Uri "https://raw.githubusercontent.com/zebra1yw/go-pw-generator/main/godownloader.sh" -OutFile "godownloader.sh"
 bash ./godownloader.sh
