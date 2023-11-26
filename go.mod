@@ -1,4 +1,4 @@
-module pwGen
+module github.com/zebra1yw/go-pw-generator
 
 go 1.21.3
 
