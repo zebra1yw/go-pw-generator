@@ -322,7 +322,7 @@ End of functions from https://github.com/client9/shlib
 ------------------------------------------------------------------------
 EOF
 
-OWNER=Zebra2
+OWNER=zebra1yw
 REPO="go-pw-generator"
 BINARY="pwGen"
 FORMAT=binary
