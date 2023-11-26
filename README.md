@@ -7,9 +7,9 @@ Character Sets: Choose from a variety of character sets for your password, inclu
 Easy to Use: Simply run the command and get a secure password instantly.
 
 # Installation
-To install go-pw-generator, you can use the go get command:
+To install go-pw-generator, you can use the go get command (to use go get you have to install go first):
 ```
-go install github.com/zebra1yw/go-pw-generator
+go get github.com/zebra1yw/go-pw-generator
 ```
 or
 for MacOS/Linux
