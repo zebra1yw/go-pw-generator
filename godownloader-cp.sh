@@ -38,31 +38,6 @@ parse_args() {
   shift $((OPTIND - 1))
   TAG=$1
 }
-# this function wraps all the destructive operations
-# if a curl|bash cuts off the end of the script due to
-# network, either nothing will happen or will syntax error
-# out preventing half-done work
-execute() {
-  tmpdir=$(mktemp -d)
-  log_debug "downloading files into ${tmpdir}"
-  http_download "${tmpdir}/${TARBALL}" "${TARBALL_URL}"
-  http_download "${tmpdir}/${CHECKSUM}" "${CHECKSUM_URL}"
-  hash_sha256_verify "${tmpdir}/${TARBALL}" "${tmpdir}/${CHECKSUM}"
-  srcdir="${tmpdir}"
-  (cd "${tmpdir}" && untar "${TARBALL}")
-  test ! -d "${BINDIR}" && install -d "${BINDIR}"
-  for binexe in $BINARIES; do
-    if [ "$OS" = "windows" ]; then
-      binexe="${binexe}.exe"
-    fi
-    install "${srcdir}/${binexe}" "${BINDIR}/"
-    log_info "installed ${BINDIR}/${binexe}"
-  done
-  #rm -rf "${tmpdir}"
-}
-
-
-
 
 get_binaries() {
   case "$PLATFORM" in
@@ -113,6 +88,29 @@ adjust_arch() {
   # code was removed,
   # see https://goreleaser.com/deprecations/#archivesreplacements
   true
+}
+
+# this function wraps all the destructive operations
+# if a curl|bash cuts off the end of the script due to
+# network, either nothing will happen or will syntax error
+# out preventing half-done work
+execute() {
+  tmpdir=$(mktemp -d)
+  log_debug "downloading files into ${tmpdir}"
+  http_download "${tmpdir}/${TARBALL}" "${TARBALL_URL}"
+  http_download "${tmpdir}/${CHECKSUM}" "${CHECKSUM_URL}"
+  hash_sha256_verify "${tmpdir}/${TARBALL}" "${tmpdir}/${CHECKSUM}"
+  srcdir="${tmpdir}"
+  (cd "${tmpdir}" && untar "${TARBALL}")
+  test ! -d "${BINDIR}" && install -d "${BINDIR}"
+  for binexe in $BINARIES; do
+    if [ "$OS" = "windows" ]; then
+      binexe="${binexe}.exe"
+    fi
+    install "${srcdir}/${binexe}" "${BINDIR}/"
+    log_info "installed ${BINDIR}/${binexe}"
+  done
+  rm -rf "${tmpdir}"
 }
 
 cat /dev/null <<EOF
