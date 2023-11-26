@@ -114,11 +114,11 @@ adjust_arch() {
 #}
 
 execute() {
-  TMPDIR=$(mktemp -d)
+  tmpdir=$(mktemp -d)
   log_info "downloading from ${TARBALL_URL}"
-  http_download "${TMPDIR}/${NAME}" "$TARBALL_URL"
+  http_download "${tmpdir}/${NAME}" "$TARBALL_URL"
   test ! -d "${BINDIR}" && install -d "${BINDIR}"
-  install "${TMPDIR}/${NAME}" "${BINDIR}/${BINARY}"
+  install "${tmpdir}/${NAME}" "${BINDIR}/${BINARY}"
   log_info "installed ${BINDIR}/${BINARY}"
 }
 
