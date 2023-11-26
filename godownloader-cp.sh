@@ -94,24 +94,34 @@ adjust_arch() {
 # if a curl|bash cuts off the end of the script due to
 # network, either nothing will happen or will syntax error
 # out preventing half-done work
+#execute() {
+#  tmpdir=$(mktemp -d)
+#  log_debug "downloading files into ${tmpdir}"
+#  http_download "${tmpdir}/${TARBALL}" "${TARBALL_URL}"
+#  http_download "${tmpdir}/${CHECKSUM}" "${CHECKSUM_URL}"
+#  hash_sha256_verify "${tmpdir}/${TARBALL}" "${tmpdir}/${CHECKSUM}"
+#  srcdir="${tmpdir}"
+#  (cd "${tmpdir}" && untar "${TARBALL}")
+#  test ! -d "${BINDIR}" && install -d "${BINDIR}"
+#  for binexe in $BINARIES; do
+#    if [ "$OS" = "windows" ]; then
+#      binexe="${binexe}.exe"
+#    fi
+#    install "${srcdir}/${binexe}" "${BINDIR}/"
+#    log_info "installed ${BINDIR}/${binexe}"
+#  done
+#  rm -rf "${tmpdir}"
+#}
+
 execute() {
-  tmpdir=$(mktemp -d)
-  log_debug "downloading files into ${tmpdir}"
-  http_download "${tmpdir}/${TARBALL}" "${TARBALL_URL}"
-  http_download "${tmpdir}/${CHECKSUM}" "${CHECKSUM_URL}"
-  hash_sha256_verify "${tmpdir}/${TARBALL}" "${tmpdir}/${CHECKSUM}"
-  srcdir="${tmpdir}"
-  (cd "${tmpdir}" && untar "${TARBALL}")
+  TMPDIR=$(mktemp -d)
+  log_info "downloading from ${TARBALL_URL}"
+  http_download "${TMPDIR}/${NAME}" "$TARBALL_URL"
   test ! -d "${BINDIR}" && install -d "${BINDIR}"
-  for binexe in $BINARIES; do
-    if [ "$OS" = "windows" ]; then
-      binexe="${binexe}.exe"
-    fi
-    install "${srcdir}/${binexe}" "${BINDIR}/"
-    log_info "installed ${BINDIR}/${binexe}"
-  done
-  rm -rf "${tmpdir}"
+  install "${TMPDIR}/${NAME}" "${BINDIR}/${BINARY}"
+  log_info "installed ${BINDIR}/${BINARY}"
 }
+
 
 cat /dev/null <<EOF
 ------------------------------------------------------------------------
@@ -382,4 +392,6 @@ TARBALL_URL=${GITHUB_DOWNLOAD}/${TAG}/${TARBALL}
 CHECKSUM=checksums.txt
 CHECKSUM_URL=${GITHUB_DOWNLOAD}/${TAG}/${CHECKSUM}
 
+
+log_info "installation ready to execute"
 execute
