@@ -1,5 +1,5 @@
 /*
-Copyright © 2023 Zebra2 
+Copyright © 2023 Zebra2@github
 
 */
 package main
