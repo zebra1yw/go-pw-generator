@@ -100,7 +100,7 @@ execute() {
   http_download "${tmpdir}/${TARBALL}" "${TARBALL_URL}"
   http_download "${tmpdir}/${CHECKSUM}" "${CHECKSUM_URL}"
   srcdir="${tmpdir}"
-  (cd "${tmpdir}" && untar "${TARBALL}")
+  (cd "${tmpdir}")
   test ! -d "${BINDIR}" && install -d "${BINDIR}"
   for binexe in $BINARIES; do
     if [ "$OS" = "windows" ]; then
