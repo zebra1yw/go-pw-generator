@@ -117,6 +117,7 @@ execute() {
   tmpdir=$(mktemp -d)
   log_info "downloading from ${TARBALL_URL}"
   http_download "${tmpdir}/${NAME}" "$TARBALL_URL"
+  log_info "downloaded complete"
   test ! -d "${BINDIR}" && install -d "${BINDIR}"
     install "${tmpdir}/${NAME}" "${BINDIR}/${BINARY}"
   log_info "installed ${BINDIR}/${BINARY}"
