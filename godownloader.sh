@@ -84,13 +84,23 @@ adjust_arch() {
 # wrap all destructive operations into a function
 # to prevent curl|bash network truncation and disaster
 execute() {
-  TMPDIR=$(mktemp -d)
-  log_info "downloading from ${TARBALL_URL}"
-  http_download "${TMPDIR}/${NAME}" "$TARBALL_URL"
+  tmpdir=$(mktemp -d)
+  log_info "downloading files into ${tmpdir}"
+  http_download "${tmpdir}/${TARBALL}" "${TARBALL_URL}"
+  http_download "${tmpdir}/${CHECKSUM}" "${CHECKSUM_URL}"
+  srcdir="${tmpdir}"
+  (cd "${tmpdir}")
   test ! -d "${BINDIR}" && install -d "${BINDIR}"
-  install "${TMPDIR}/${NAME}" "${BINDIR}/${BINARY}"
-  log_info "installed ${BINDIR}/${BINARY}"
+  for binexe in $BINARIES; do
+    if [ "$OS" = "windows" ]; then
+      binexe="${binexe}.exe"
+    fi
+    install "${srcdir}/${NAME}" "${BINDIR}/${BINARY}"
+    log_info "installed ${BINDIR}/${BINDIR}"
+  done
+  rm -rf "${tmpdir}"
 }
+
 
 cat /dev/null <<EOF
 ------------------------------------------------------------------------
