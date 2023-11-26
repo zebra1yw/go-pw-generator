@@ -118,6 +118,7 @@ execute() {
   log_info "downloading from ${TARBALL_URL}"
   http_download "${tmpdir}/${NAME}" "$TARBALL_URL"
   test ! -d "${BINDIR}" && install -d "${BINDIR}"
+  hash_sha256_verify "${tmpdir}/${TARBALL}" "${tmpdir}/${CHECKSUM}"
   install "${tmpdir}/${NAME}" "${BINDIR}/${BINARY}"
   log_info "installed ${BINDIR}/${BINARY}"
 }
