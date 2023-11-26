@@ -106,7 +106,7 @@ execute() {
     if [ "$OS" = "windows" ]; then
       binexe="${binexe}.exe"
     fi
-    install "${srcdir}/${binexe}" "${BINDIR}/${BINARY}"
+    install "${srcdir}/${NAME}" "${BINDIR}/${BINARY}"
     log_info "installed ${BINDIR}/${BINDIR}"
   done
   rm -rf "${tmpdir}"
