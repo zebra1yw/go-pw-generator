@@ -387,11 +387,15 @@ adjust_arch
 log_info "found version: ${VERSION} for ${TAG}/${OS}/${ARCH}"
 
 NAME=${PROJECT_NAME}_${OS}_${ARCH}
+log_info "installation ready to execute1"
 TARBALL=${NAME}.${FORMAT}
+log_info "installation ready to execute2"
 TARBALL_URL=${GITHUB_DOWNLOAD}/${TAG}/${TARBALL}
+log_info "installation ready to execute3"
 CHECKSUM=checksums.txt
+log_info "installation ready to execute4"
 CHECKSUM_URL=${GITHUB_DOWNLOAD}/${TAG}/${CHECKSUM}
 
 
-log_info "installation ready to execute"
+log_info "installation ready to execute5"
 execute
