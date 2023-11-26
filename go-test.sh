@@ -116,10 +116,9 @@ adjust_arch() {
 execute() {
   tmpdir=$(mktemp -d)
   log_info "downloading from ${TARBALL_URL}"
-  http_download "${tmpdir}/${NAME}" "$TARBALL_URL"
-  log_info "downloaded complete"
+  http_download "${tmpdir}/${TARBALL}" "${TARBALL_URL}"
   test ! -d "${BINDIR}" && install -d "${BINDIR}"
-    install "${tmpdir}/${NAME}" "${BINDIR}/${BINARY}"
+  install "${tmpdir}/${NAME}" "${BINDIR}/${BINARY}"
   log_info "installed ${BINDIR}/${BINARY}"
 }
 
@@ -389,6 +388,7 @@ log_info "found version: ${VERSION} for ${TAG}/${OS}/${ARCH}"
 
 NAME=${PROJECT_NAME}_${OS}_${ARCH}
 log_info "installation ready to execute1"
+#TARBALL=${NAME}.${FORMAT}
 TARBALL=${NAME}.${FORMAT}
 log_info "installation ready to execute2"
 TARBALL_URL=${GITHUB_DOWNLOAD}/${TAG}/${TARBALL}
