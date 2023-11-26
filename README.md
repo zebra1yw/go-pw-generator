@@ -39,6 +39,11 @@ You can also specify the length of the password,  to generate a 12-character pas
 # Contributing
 Contributions are welcome! Please feel free to submit a Pull Request.
 
+# External Libraies
+| Library Name | Link | License | 
+|---|---|---|
+| Cobra | https://github.com/spf13/cobra| Apache License 2.0 |
+
 # License
 go-pw-generator is licensed under the MIT License.
 
