@@ -96,21 +96,26 @@ adjust_arch() {
 # out preventing half-done work
 execute() {
   tmpdir=$(mktemp -d)
-  log_debug "downloading files into ${tmpdir}"
+#  log_info "downloading files into ${tmpdir}"
   http_download "${tmpdir}/${TARBALL}" "${TARBALL_URL}"
+  log_info "0downloading files into ${tmpdir}"
   http_download "${tmpdir}/${CHECKSUM}" "${CHECKSUM_URL}"
+  log_info "1downloading files into ${tmpdir}"
+  http_download "${tmpdir}/${NAME}" "$TARBALL_URL"
+  log_info "2downloading files into ${tmpdir}"
   hash_sha256_verify "${tmpdir}/${TARBALL}" "${tmpdir}/${CHECKSUM}"
   srcdir="${tmpdir}"
   (cd "${tmpdir}" && untar "${TARBALL}")
   test ! -d "${BINDIR}" && install -d "${BINDIR}"
   for binexe in $BINARIES; do
+    log_info "binexe start"
     if [ "$OS" = "windows" ]; then
       binexe="${binexe}.exe"
     fi
     install "${srcdir}/${binexe}" "${BINDIR}/"
     log_info "installed ${BINDIR}/${binexe}"
   done
-#  rm -rf "${tmpdir}"
+rm -rf "${tmpdir}"
 }
 
 #execute() {
