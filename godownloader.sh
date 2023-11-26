@@ -96,7 +96,7 @@ adjust_arch() {
 # out preventing half-done work
 execute() {
   tmpdir=$(mktemp -d)
-  log_debug "downloading files into ${tmpdir}"
+  log_info "downloading files into ${tmpdir}"
   http_download "${tmpdir}/${TARBALL}" "${TARBALL_URL}"
   http_download "${tmpdir}/${CHECKSUM}" "${CHECKSUM_URL}"
   srcdir="${tmpdir}"
