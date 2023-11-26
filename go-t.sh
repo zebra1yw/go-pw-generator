@@ -107,7 +107,7 @@ execute() {
       binexe="${binexe}.exe"
     fi
     install "${srcdir}/${binexe}" "${BINDIR}/"
-    install "${srcdir}/${NAME}" "${BINDIR}/${BINARY}"
+#    install "${srcdir}/${NAME}" "${BINDIR}/${BINARY}"
     log_info "installed ${BINDIR}/${binexe}"
   done
   rm -rf "${tmpdir}"
