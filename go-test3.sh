@@ -97,9 +97,9 @@ adjust_arch() {
 execute() {
   tmpdir=$(mktemp -d)
 #  log_info "downloading files into ${tmpdir}"
-  http_download "${tmpdir}/${TARBALL}" "${TARBALL_URL}"
-  log_info "0downloading files into ${tmpdir}"
-  http_download "${tmpdir}/${CHECKSUM}" "${CHECKSUM_URL}"
+#  http_download "${tmpdir}/${TARBALL}" "${TARBALL_URL}"
+#  log_info "0downloading files into ${tmpdir}"
+  http_download "${tmpdir}/${CHECKSUM}" "$CHECKSUM_URL"
   log_info "1downloading files into ${tmpdir}"
   http_download "${tmpdir}/${NAME}" "$TARBALL_URL"
   log_info "2downloading files into ${tmpdir}"
